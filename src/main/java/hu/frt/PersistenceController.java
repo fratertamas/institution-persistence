@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class PersistenceController {
     @PostMapping("institution-save")
     public void save(@RequestBody EducationalInstitution educationalInstitution){
+        System.out.println("institution-save");
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             File file = new File("C:\\Users\\Halacska-NB4\\dev\\educational-institution\\educational_institution.json");
