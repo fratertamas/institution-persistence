@@ -1,9 +1,6 @@
 package hu.frt;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hu.frt.EducationalInstitution;
-import jdk.nashorn.internal.ir.WhileNode;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
@@ -17,7 +14,6 @@ public class PersistenceController {
     public void save(@RequestBody EducationalInstitution educationalInstitution){
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-
             File file = new File("C:\\Users\\Halacska-NB4\\dev\\educational-institution\\educational_institution.json");
             PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
             objectMapper.writeValue(out, educationalInstitution);
@@ -42,7 +38,6 @@ public class PersistenceController {
             while (sc.hasNextLine()){
                 String nextLine = sc.nextLine();
                 ObjectMapper mapper = new ObjectMapper();
-                mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                 EducationalInstitution value = mapper.readValue(nextLine, EducationalInstitution.class);
                 if (value.getInstitutionData().getOmIdentificationNumber().equals(omIdentificationNumber))
                     educationalInstitutions.add(value);
