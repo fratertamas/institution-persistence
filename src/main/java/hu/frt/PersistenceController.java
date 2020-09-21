@@ -1,6 +1,10 @@
 package hu.frt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ExampleProperty;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
@@ -10,6 +14,31 @@ import java.util.Scanner;
 
 @RestController
 public class PersistenceController {
+    @ApiOperation(value = "Oktatási intézmény adatainak mentése")
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "contents",
+                    dataTypeClass = EducationalInstitution.class,
+                    examples = @io.swagger.annotations.Example(
+                            value = {
+                                    @ExampleProperty(value = "{\n" +
+                                            "  \"headOfInstitutionData\": {\n" +
+                                            "    \"firstName\": \"Vargáné Vincze\",\n" +
+                                            "    \"phoneNumber\": \"06303316023 \",\n" +
+                                            "    \"surname\": \"Tímea\"\n" +
+                                            "  },\n" +
+                                            "  \"institutionData\": {\n" +
+                                            "    \"name\": \"Sennyey Elza Általános Iskola\",\n" +
+                                            "    \"numberOfTaskLocation\": 2,\n" +
+                                            "    \"omIdentificationNumber\": \"033488\",\n" +
+                                            "    \"status\": \"aktív\",\n" +
+                                            "    \"taxNumber\": \" 15835231-2-15\",\n" +
+                                            "    \"type\": \"Általános iskola\"\n" +
+                                            "  }\n" +
+                                            "}", mediaType = "application/json")
+                            })
+            )
+    })
     @PostMapping("institution-save")
     public void save(@RequestBody EducationalInstitution educationalInstitution){
         System.out.println("institution-save");
